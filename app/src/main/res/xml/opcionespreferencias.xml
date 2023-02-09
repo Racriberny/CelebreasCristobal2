@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Datos de conexión">
+
+
+    <Preference
+        android:defaultValue="IpServidor"
+        android:key="ipservidor"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Direccion del Servidor"
+        android:title="IP SERVIDOR"/>
+    <Preference
+        android:defaultValue="PuetoServidor"
+        android:key="puertoservidor"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Puerto del Servidor"
+        android:title="PUERTO SERVIDOR"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Datos Usuarios">
+
+
+    <Preference
+        android:defaultValue="Usuario"
+        android:key="etp_usuario"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Usuario"/>
+    <Preference
+        android:defaultValue="Contraseña"
+        android:inputType="textPassword"
+        android:key="etp_password"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:summary="Indica tu contraseña"
+        android:title="Contraseña"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Datos Hora de Hotificacion">
+
+    <EditTextPreference
+        android:defaultValue="Hora Notificacion"
+        android:key="etp_notificacion"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:title="Hora Notificacion"/>
+    </PreferenceCategory>
+</PreferenceScreen>
