@@ -7,7 +7,6 @@ import androidx.preference.PreferenceManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ import comcristobalbernal.celebreascristobal.Utils.SettingActivity;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
 import comcristobalbernal.celebreascristobal.models.Autor;
 import comcristobalbernal.celebreascristobal.models.Categoria;
-import comcristobalbernal.celebreascristobal.models.Frase;
 import comcristobalbernal.celebreascristobal.models.Usuario;
 import comcristobalbernal.celebreascristobal.rest.RestClient;
 import retrofit2.Call;
@@ -34,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
     private SharedPreferences prefs;
     private List<Autor> autores;
     private List<Categoria> categorias;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
     public void creacionyCargaDatos(){
         getCargarCategorias();
         getCargarAutores();
-
+        //getCargaUsuarios();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("ip",RestClient.CASA);
@@ -124,7 +121,20 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
             }
         });
     }
+    /*
+    private void getCargaUsuarios(){
+        apiService.getUsuario().enqueue(new Callback<List<Usuario>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<Usuario>> call, @NonNull Response<List<Usuario>> response) {
+                assert response.body() != null;
+                usuario.addAll(response.body());
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<List<Usuario>> call, @NonNull Throwable t) {
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
-
+            }
+        });
+    }*/
 }

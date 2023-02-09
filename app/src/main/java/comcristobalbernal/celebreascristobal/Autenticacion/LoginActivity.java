@@ -10,7 +10,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
 import comcristobalbernal.celebreascristobal.MainActivity;
@@ -23,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity implements Serializable {
+public class LoginActivity extends AppCompatActivity {
     private IAPIService iapiService;
     private SharedPreferences prefs;
     private EditText etUsername, etPassword;
