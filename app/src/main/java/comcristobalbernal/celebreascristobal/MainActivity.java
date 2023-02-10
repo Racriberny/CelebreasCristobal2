@@ -99,6 +99,49 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         }
         return categorias;
     }
+    @Override
+    public List<Frase> getFrasesAutor() {
+        return frases;
+    }
+
+    @Override
+    public Autor getAutorSeleccionado() {
+        return autorSeleccionado;
+    }
+
+    @Override
+    public void onCategoriaSeleccionada(int id) {
+        categoriaSeleccionado = categorias.get(id);
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .replace(R.id.frgMain, FragmentCategoriaFrase.class, null)
+                .commit();
+    }
+
+    @Override
+    public List<Frase> getFrasesCategoria() {
+        return frases;
+    }
+
+    @Override
+    public Categoria getCategoriaSeleccionada() {
+        return categoriaSeleccionado;
+    }
+
+    @Override
+    public void onAutorFraseSeleccionado(int id) {
+        autorSeleccionado = autores.get(id);
+
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction()
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .replace(R.id.frgMain, FragmentAutorFrases.class, null)
+                .commit();
+    }
 
     public void getCargarAutores() {
         apiService.getAutor().enqueue(new Callback<List<Autor>>() {
@@ -150,49 +193,9 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         });
     }
 
-    @Override
-    public void onAutorFraseSeleccionado(int id) {
-        autorSeleccionado = autores.get(id);
 
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .replace(R.id.frgMain, FragmentAutorFrases.class, null)
-                .commit();
-    }
 
-    @Override
-    public List<Frase> getFrasesAutor() {
-        return frases;
-    }
 
-    @Override
-    public Autor getAutorSeleccionado() {
-        return autorSeleccionado;
-    }
-
-    @Override
-    public void onCategoriaSeleccionada(int id) {
-        categoriaSeleccionado = categorias.get(id);
-
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(null)
-                .replace(R.id.frgMain, FragmentCategoriaFrase.class, null)
-                .commit();
-    }
-
-    @Override
-    public List<Frase> getFrasesCategoria() {
-        return frases;
-    }
-
-    @Override
-    public Categoria getCategoriaSeleccionada() {
-        return categoriaSeleccionado;
-    }
 
 
     /*

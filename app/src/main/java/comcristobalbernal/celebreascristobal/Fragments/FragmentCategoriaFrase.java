@@ -2,7 +2,9 @@ package comcristobalbernal.celebreascristobal.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +26,6 @@ public class FragmentCategoriaFrase extends Fragment {
         Categoria getCategoriaSeleccionada();
     }
     private List<Frase> frases;
-    private  List<Frase> frasesCategoria;
     private Categoria categoria;
 
     public FragmentCategoriaFrase() {
@@ -35,14 +36,15 @@ public class FragmentCategoriaFrase extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        RecyclerView rvLista = view.findViewById(R.id.rvLista);
-        frasesCategoria = new ArrayList<>();
+
+        List<Frase> frasesCategoria = new ArrayList<>();
         for (Frase frase : frases) {
-            if (frase.getIdCategoria() == categoria.getId()) {
+            if (frase.getIdAutor() == categoria.getId()) {
+                System.out.println(frase);
                 frasesCategoria.add(frase);
             }
         }
-
+        RecyclerView rvLista = view.findViewById(R.id.rvLista);
         AdapatadorCategoriaFrase adaptadorFrases = new AdapatadorCategoriaFrase(frasesCategoria, categoria);
         rvLista.setHasFixedSize(true);
         rvLista.setAdapter(adaptadorFrases);

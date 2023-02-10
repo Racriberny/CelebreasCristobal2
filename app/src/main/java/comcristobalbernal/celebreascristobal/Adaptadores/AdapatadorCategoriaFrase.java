@@ -27,7 +27,7 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
     @NonNull
     @Override
     public CategoriFraseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.listitem_frase_autor, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.litimte_categoria_frases, parent, false);
 
         return new CategoriFraseViewHolder(itemView);
     }
@@ -41,7 +41,7 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
 
     @Override
     public int getItemCount() {
-        return 0;
+        return frases.size();
     }
 
     public class CategoriFraseViewHolder extends RecyclerView.ViewHolder {
@@ -51,7 +51,7 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
         public CategoriFraseViewHolder(@NonNull View itemView) {
             super(itemView);
             this.tvCategoria = itemView.findViewById(R.id.tvCategoria);
-            this.tvFrase = itemView.findViewById(R.id.tvFraseCateg);
+            this.tvFrase = itemView.findViewById(R.id.tvFragCateg);
         }
 
         public void bindCategoriaFrase(Frase frase) {
