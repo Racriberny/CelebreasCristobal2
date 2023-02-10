@@ -9,37 +9,37 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.cristobalbernal.frasecelebrescristobal.Adaptadores.AdaptadoFrasesAutor;
-import com.cristobalbernal.frasecelebrescristobal.R;
-import com.cristobalbernal.frasecelebrescristobal.models.Autor;
-import com.cristobalbernal.frasecelebrescristobal.models.Frase;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFraseAutor extends Fragment {
+import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadoFrasesAutor;
+import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.models.Autor;
+import comcristobalbernal.celebreascristobal.models.Frase;
 
+public class FragmentAutorFrases extends Fragment {
     public interface IOnAttachListenerAutorFrase {
         List<Frase> getFrasesAutor();
         Autor getAutorSeleccionado();
     }
 
     private List<Frase> frases;
-    private final List<Frase> frasesAutor = new ArrayList<>();
+    private List<Frase> frasesAutor;
     private Autor autor;
 
-    public FragmentFraseAutor(){
+    public FragmentAutorFrases(){
         super(R.layout.lista);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        frasesAutor = new ArrayList<>();
         RecyclerView rvLista = view.findViewById(R.id.rvLista);
-        for (Frase frase : frases) {
-            if (frase.getId() == autor.getId()) {
-                frasesAutor.add(frase);
+        //preguntar german porque no llena nada...
+        for (Frase frasess : frases) {
+            if (frasess.getIdAutor() == autor.getId()) {
+                frasesAutor.add(frasess);
             }
         }
         AdaptadoFrasesAutor adaptadorFrases = new AdaptadoFrasesAutor(frasesAutor, autor);
@@ -54,5 +54,4 @@ public class FragmentFraseAutor extends Fragment {
         frases = attachListener.getFrasesAutor();
         autor = attachListener.getAutorSeleccionado();
     }
-
 }

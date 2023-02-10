@@ -7,14 +7,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.cristobalbernal.frasecelebrescristobal.R;
-import com.cristobalbernal.frasecelebrescristobal.models.Categoria;
-import com.cristobalbernal.frasecelebrescristobal.models.Frase;
-
 import java.util.List;
 
-public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCategoriaFrase.CategoriFraseViewHolder> {
+import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.models.Categoria;
+import comcristobalbernal.celebreascristobal.models.Frase;
+
+public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCategoriaFrase.CategoriFraseViewHolder>{
+
     private final List<Frase> frases;
 
     private final Categoria categoria;
@@ -59,6 +59,4 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
             tvFrase.setText(frase.getTexto());
         }
     }
-
-
 }

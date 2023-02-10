@@ -13,6 +13,7 @@ import java.util.List;
 
 import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadorCategoria;
 import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.interfaces.ICategoriaFrase;
 import comcristobalbernal.celebreascristobal.models.Categoria;
 
 public class FragmentCategorias extends Fragment {
@@ -20,6 +21,7 @@ public class FragmentCategorias extends Fragment {
     public FragmentCategorias(){
         super(R.layout.lista);
     }
+    private ICategoriaFrase listener;
 
     public interface IOnAttach{
         List<Categoria> getCategorias();
@@ -28,7 +30,7 @@ public class FragmentCategorias extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        AdaptadorCategoria adaptadorAutor = new AdaptadorCategoria(categorias);
+        AdaptadorCategoria adaptadorAutor = new AdaptadorCategoria(categorias,listener);
         RecyclerView recyclerView = view.findViewById(R.id.rvLista);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adaptadorAutor);
@@ -40,6 +42,6 @@ public class FragmentCategorias extends Fragment {
         super.onAttach(context);
         IOnAttach iOnAttach = (IOnAttach) context;
         categorias = iOnAttach.getCategorias();
-
+        listener = (ICategoriaFrase) context;
     }
 }

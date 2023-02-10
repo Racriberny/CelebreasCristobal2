@@ -9,22 +9,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.cristobalbernal.frasecelebrescristobal.Adaptadores.AdapatadorCategoriaFrase;
-import com.cristobalbernal.frasecelebrescristobal.R;
-import com.cristobalbernal.frasecelebrescristobal.models.Categoria;
-import com.cristobalbernal.frasecelebrescristobal.models.Frase;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import comcristobalbernal.celebreascristobal.Adaptadores.AdapatadorCategoriaFrase;
+import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.models.Categoria;
+import comcristobalbernal.celebreascristobal.models.Frase;
+
 public class FragmentCategoriaFrase extends Fragment {
+
     public interface IOnAttachListener {
         List<Frase> getFrasesCategoria();
         Categoria getCategoriaSeleccionada();
     }
     private List<Frase> frases;
-    private final List<Frase> frasesCategoria = new ArrayList<>();
+    private  List<Frase> frasesCategoria;
     private Categoria categoria;
 
     public FragmentCategoriaFrase() {
@@ -36,7 +36,7 @@ public class FragmentCategoriaFrase extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView rvLista = view.findViewById(R.id.rvLista);
-
+        frasesCategoria = new ArrayList<>();
         for (Frase frase : frases) {
             if (frase.getIdCategoria() == categoria.getId()) {
                 frasesCategoria.add(frase);
@@ -56,5 +56,4 @@ public class FragmentCategoriaFrase extends Fragment {
         frases = attachListener.getFrasesCategoria();
         categoria = attachListener.getCategoriaSeleccionada();
     }
-
 }

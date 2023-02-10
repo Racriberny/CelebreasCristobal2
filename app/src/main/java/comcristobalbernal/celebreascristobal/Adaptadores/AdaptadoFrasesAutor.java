@@ -7,14 +7,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.cristobalbernal.frasecelebrescristobal.R;
-import com.cristobalbernal.frasecelebrescristobal.models.Autor;
-import com.cristobalbernal.frasecelebrescristobal.models.Frase;
-
 import java.util.List;
 
+import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.interfaces.IAutorFrase;
+import comcristobalbernal.celebreascristobal.models.Autor;
+import comcristobalbernal.celebreascristobal.models.Frase;
+
 public class AdaptadoFrasesAutor extends RecyclerView.Adapter<AdaptadoFrasesAutor.FrasesAutorViewHolder> {
+
     private final List<Frase> frases;
     private final Autor autor;
 
@@ -52,5 +53,7 @@ public class AdaptadoFrasesAutor extends RecyclerView.Adapter<AdaptadoFrasesAuto
         public void bindAutorFrase(Frase frase){
             tvFrase.setText(frase.getTexto());
         }
+
+
     }
 }
