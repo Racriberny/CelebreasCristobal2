@@ -10,6 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import comcristobalbernal.celebreascristobal.MainActivity;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
 import comcristobalbernal.celebreascristobal.models.Autor;
@@ -20,12 +24,11 @@ import retrofit2.Response;
 
 public class FragmentAnadirAutor extends Fragment {
     private IAPIService iapiService;
-
+    private List<Autor> autors;
     private EditText edtMuerte;
     private EditText edtNacimiento;
     private EditText edtNombre;
     private EditText edtProfession;
-    private Button btAnadir;
 
     public FragmentAnadirAutor() {
         super(R.layout.anadirauto);
@@ -35,11 +38,13 @@ public class FragmentAnadirAutor extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         iapiService = RestClient.getInstance();
+        getCargarAutores();
         edtMuerte = view.findViewById(R.id.edtMuerte);
         edtNacimiento = view.findViewById(R.id.edtNacimiento);
         edtNombre = view.findViewById(R.id.edtNombre);
         edtProfession = view.findViewById(R.id.edtProfession);
-        btAnadir = view.findViewById(R.id.btAñadirAdminAutores);
+        autors = new ArrayList<>();
+        Button btAnadir = view.findViewById(R.id.btAñadirAdminAutores);
 
         btAnadir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,18 +54,15 @@ public class FragmentAnadirAutor extends Fragment {
         });
 
     }
-
+    //Probar...
     private void anadirAutor() {
+        Boolean validacion = null;
         String muerte = edtMuerte.getText().toString();
         int nacimiento = Integer.parseInt(edtNacimiento.getText().toString());
         int muerteString = Integer.parseInt(muerte);
         String nombre = edtNombre.getText().toString();
         String profession = edtProfession.getText().toString();
-        //Aqui se deberia de hacer una comprobacion que el año de naciemiento no sea inferior al de muerte.
 
-        if (nacimiento < muerteString){
-
-        }
         if (nombre.isEmpty()) {
             edtNombre.setError("Es necesario escribir algo...");
             edtNombre.requestFocus();
@@ -71,24 +73,59 @@ public class FragmentAnadirAutor extends Fragment {
             edtProfession.requestFocus();
             return;
         }
-        Call<Boolean> booleanCall = iapiService.addAutor(new Autor(nombre,nacimiento,muerte,profession));
+        if (nacimiento > muerteString){
+            validacion = false;
+            Toast.makeText(getContext(),"La muerte tiene que ser superior al nacimiento o igual!!!",Toast.LENGTH_LONG).show();
+        }
+        for (int i = 0; i < autors.size() ; i++) {
+            validacion = nombre.equalsIgnoreCase(autors.get(i).getNombre());
+        }
+        if (Boolean.TRUE.equals(validacion)){
+            Toast.makeText(getContext(), "Ya existe este autor", Toast.LENGTH_LONG).show();
+        }else if (Boolean.FALSE.equals(validacion)){
+            Call<Boolean> booleanCall = iapiService.addAutor(new Autor(nombre,nacimiento,muerte,profession));
 
-        booleanCall.enqueue(new Callback<Boolean>() {
-            @Override
-            public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                if (Boolean.TRUE.equals(response.body())){
-                    Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_LONG).show();
-                }else {
+            booleanCall.enqueue(new Callback<Boolean>() {
+                @Override
+                public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
+                    for (int i = 0; i <autors.size() ; i++) {
+                        if (nombre.equalsIgnoreCase(autors.get(i).getNombre())){
+                            Toast.makeText(getContext(),"Este autor ya existe manolo",Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    if (Boolean.TRUE.equals(response.body())){
+                        Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
                     Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+
+                }
+            });
+        }
+    }
+
+    public void getCargarAutores() {
+        iapiService.getAutor().enqueue(new Callback<List<Autor>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<Autor>> call, @NonNull Response<List<Autor>> response) {
+                if(response.isSuccessful()) {
+                    assert response.body() != null;
+                    autors.addAll(response.body());
                 }
             }
 
             @Override
-            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
-
+            public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
             }
         });
-
     }
 }
