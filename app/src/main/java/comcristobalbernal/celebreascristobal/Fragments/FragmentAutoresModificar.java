@@ -2,6 +2,7 @@ package comcristobalbernal.celebreascristobal.Fragments;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -47,11 +48,24 @@ public class FragmentAutoresModificar extends Fragment {
         iapiService = RestClient.getInstance();
         autorList = new ArrayList<>();
         adaptadorAutoresModificar = new AdaptadorAutoresModificar();
+        Button botonModificar = view.findViewById(R.id.btAdminModificarAutor);
+        id = view.findViewById(R.id.idModificarAutores);
+        muerte = view.findViewById(R.id.edtMuerteModificarAutores);
+        nacimiento = view.findViewById(R.id.edtNacimientoAutores);
+        nombre = view.findViewById(R.id.edtNombreAutores);
+        profession = view.findViewById(R.id.edtProfesionAutores);
         RecyclerView recyclerView = view.findViewById(R.id.rvModificarAutores);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adaptadorAutoresModificar);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         getCargarAutores();
+
+        botonModificar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modificarAutores();
+            }
+        });
     }
 
 
@@ -71,6 +85,26 @@ public class FragmentAutoresModificar extends Fragment {
             @Override
             public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "No se han podido obtener los autores", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void modificarAutores(){
+        int idAutor = Integer.parseInt(id.getText().toString());
+        String muerteAutor = muerte.getText().toString();
+        int nacimientoAutor = Integer.parseInt(nacimiento.getText().toString());
+        String nombreAutor = nombre.getText().toString();
+        String professionAuto = profession.getText().toString();
+        Autor autorModificado = new Autor(idAutor,nombreAutor,nacimientoAutor,muerteAutor,professionAuto);
+
+        iapiService.modificarAutores(autorModificado).enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Toast.makeText(getContext(),"Autor modificada",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -73,8 +73,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                 System.out.println(response.body());
                 if (Boolean.TRUE.equals(response.body())) {
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("admin",username));
                     Toast.makeText(LoginActivity.this, "Has inicion sesion con " +username, Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("usuario",username));
                     prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("name",username);

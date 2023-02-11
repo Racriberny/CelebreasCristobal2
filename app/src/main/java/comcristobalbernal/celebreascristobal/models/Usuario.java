@@ -1,8 +1,9 @@
 package comcristobalbernal.celebreascristobal.models;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Serializable {
     private int id;
     private String nombre;
     private String contrasenya;

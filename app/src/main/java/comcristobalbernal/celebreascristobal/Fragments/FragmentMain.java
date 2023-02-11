@@ -1,6 +1,7 @@
 package comcristobalbernal.celebreascristobal.Fragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +26,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentMain extends Fragment{
-
+public class FragmentMain extends Fragment {
 
     public FragmentMain() {
         super(R.layout.layout_principal);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -37,8 +40,6 @@ public class FragmentMain extends Fragment{
         Button btnAdmin = view.findViewById(R.id.btAdmin);
         Button btAutores = view.findViewById(R.id.btConsultasActores);
         Button btCategorias = view.findViewById(R.id.btConsultasCategorias);
-
-        //Pueden accerder todos se deberia de cambiar a que solo pudiera con rol de admin.
         btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

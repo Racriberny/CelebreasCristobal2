@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
     private List<Frase> frases;
     private List<Categoria> categorias;
     private Autor autorSeleccionado;
-    private Usuario activo;
     private Categoria categoriaSeleccionado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -197,4 +196,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
             }
         });
     }
+
+
 }

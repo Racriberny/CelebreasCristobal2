@@ -20,6 +20,13 @@ public class Autor {
         this.muerte = muerte;
         this.profesion = profesion;
     }
+    public Autor(int id, String nombre, int nacimiento, String muerte, String profesion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.nacimiento = nacimiento;
+        this.muerte = muerte;
+        this.profesion = profesion;
+    }
 
     public int getId() {
         return id;
