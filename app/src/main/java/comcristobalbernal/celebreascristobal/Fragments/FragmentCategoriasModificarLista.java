@@ -1,6 +1,5 @@
 package comcristobalbernal.celebreascristobal.Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,26 +15,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadorCategoriasMLista;
-import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadorFrase;
-import comcristobalbernal.celebreascristobal.MainActivity;
+import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadorCategoriasModificarLista;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
 import comcristobalbernal.celebreascristobal.models.Categoria;
-import comcristobalbernal.celebreascristobal.models.Frase;
 import comcristobalbernal.celebreascristobal.rest.RestClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentCategoriasMLista  extends Fragment {
+public class FragmentCategoriasModificarLista extends Fragment {
     private IAPIService iapiService;
-    private AdaptadorCategoriasMLista adaptadorCategoriasMLista;
+    private AdaptadorCategoriasModificarLista adaptadorCategoriasMLista;
     private List<Categoria> categoriaList;
     private EditText categoriaModificada;
     private EditText id;
 
-    public FragmentCategoriasMLista(){
+    public FragmentCategoriasModificarLista(){
         super(R.layout.rvlistamodificar);
     }
 
@@ -44,7 +40,7 @@ public class FragmentCategoriasMLista  extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         iapiService = RestClient.getInstance();
         categoriaList = new ArrayList<>();
-        adaptadorCategoriasMLista = new AdaptadorCategoriasMLista();
+        adaptadorCategoriasMLista = new AdaptadorCategoriasModificarLista();
         id = view.findViewById(R.id.idListaCategoria);
         categoriaModificada = view.findViewById(R.id.modificacionCategoria);
         Button buttonModificar = view.findViewById(R.id.botonModificarCategoria);

@@ -14,11 +14,11 @@ import java.util.List;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.models.Categoria;
 
-public class AdaptadorCategoriasMLista extends RecyclerView.Adapter<AdaptadorCategoriasMLista.CategoriaViewHolderLista> {
+public class AdaptadorCategoriasModificarLista extends RecyclerView.Adapter<AdaptadorCategoriasModificarLista.CategoriaViewHolderLista> {
 
     private List<Categoria> categorias;
 
-    public AdaptadorCategoriasMLista(){
+    public AdaptadorCategoriasModificarLista(){
         categorias = new ArrayList<>();
     }
 

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/idAutoresModificar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="id"
+        android:paddingLeft="10dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/muerteAutoresModificar"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Muerte" />
+
+    <TextView
+        android:id="@+id/nacimientoAutoresModificar"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Nacimiento" />
+    <TextView
+        android:id="@+id/nombreAutoresModificar"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre" />
+    <TextView
+        android:id="@+id/professionAutoresModificar"
+        android:layout_width="wrap_content"
+        android:paddingLeft="10dp"
+        android:layout_height="wrap_content"
+        android:hint="Profession" />
+
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:src="@drawable/linea" />
+
+
+</LinearLayout>
