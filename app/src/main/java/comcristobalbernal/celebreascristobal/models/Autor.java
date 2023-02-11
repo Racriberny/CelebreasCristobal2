@@ -14,8 +14,7 @@ public class Autor {
     public Autor() {
     }
 
-    public Autor(int id, String nombre, int nacimiento, String muerte, String profesion) {
-        this.id = id;
+    public Autor(String nombre, int nacimiento, String muerte, String profesion) {
         this.nombre = nombre;
         this.nacimiento = nacimiento;
         this.muerte = muerte;

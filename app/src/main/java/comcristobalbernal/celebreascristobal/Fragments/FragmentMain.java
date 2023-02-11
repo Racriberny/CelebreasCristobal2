@@ -28,7 +28,7 @@ public class FragmentMain extends Fragment {
         btAutores = view.findViewById(R.id.btConsultasActores);
         btCategorias = view.findViewById(R.id.btConsultasCategorias);
 
-        /*
+
         btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +39,7 @@ public class FragmentMain extends Fragment {
                         .replace(R.id.frgMain, FragmentAdmin.class, null)
                         .commit();
             }
-        });*/
+        });
 
         btFrases.setOnClickListener(new View.OnClickListener() {
             @Override
