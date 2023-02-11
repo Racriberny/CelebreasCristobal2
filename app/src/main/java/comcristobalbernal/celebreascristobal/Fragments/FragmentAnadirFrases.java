@@ -94,7 +94,7 @@ public class FragmentAnadirFrases extends Fragment {
             categoria.setError("Es necesario escribir algo...");
             categoria.requestFocus();
             return;
-        }
+        }//Faltaria la comprobacion de si el mes esta bien.
         if (fechaProgradama.isEmpty()) {
             fechaProgramada.setError("Es necesario escribir algo...");
             fechaProgramada.requestFocus();
