@@ -9,17 +9,17 @@ public class Frase {
     private int id;
     private String texto;
     private String fechaprogramada;
-    private int idAutor;
-    private int idCategoria;
+    private int autorId;
+    private int categoriaId;
 
     public Frase() {
     }
 
-    public Frase(String texto, String fechaProgramada, int idAutor, int idCategoria) {
+    public Frase(String texto, String fechaProgramada, int autor_id, int categoria_id) {
         this.texto = texto;
         this.fechaprogramada = fechaProgramada;
-        this.idAutor = idAutor;
-        this.idCategoria = idCategoria;
+        this.autorId = autor_id;
+        this.categoriaId = categoria_id;
     }
 
     public int getId() {
@@ -66,20 +66,20 @@ public class Frase {
     }
      */
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public int getCategoriaId() {
+        return categoriaId;
     }
 
-    public int getIdAutor() {
-        return idAutor;
+    public int getAutorId() {
+        return autorId;
     }
 
-    public void setIdAutor(int idAutor) {
-        this.idAutor = idAutor;
+    public void setAutorId(int autorId) {
+        this.autorId = autorId;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setCategoriaId(int categoriaId) {
+        this.categoriaId = categoriaId;
     }
 
     @Override
@@ -104,8 +104,8 @@ public class Frase {
                 "id=" + id +
                 ", texto='" + texto + '\'' +
                 ", fechaProgramada='" + fechaprogramada + '\'' +
-                ", autor=" + idAutor +
-                ", categoria=" + idCategoria +
+                ", autor=" + autorId +
+                ", categoria=" + categoriaId +
                 '}';
     }
 }

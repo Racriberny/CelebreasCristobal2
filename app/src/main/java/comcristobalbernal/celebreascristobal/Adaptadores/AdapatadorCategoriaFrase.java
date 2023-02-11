@@ -45,17 +45,14 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
     }
 
     public class CategoriFraseViewHolder extends RecyclerView.ViewHolder {
-        private final TextView tvCategoria;
         private final TextView tvFrase;
 
         public CategoriFraseViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.tvCategoria = itemView.findViewById(R.id.tvCategoria);
             this.tvFrase = itemView.findViewById(R.id.tvFragCateg);
         }
 
         public void bindCategoriaFrase(Frase frase) {
-            tvCategoria.setText(categoria.getNombre());
             tvFrase.setText(frase.getTexto());
         }
     }

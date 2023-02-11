@@ -11,6 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
 import comcristobalbernal.celebreascristobal.models.Categoria;
@@ -21,7 +24,7 @@ import retrofit2.Response;
 
 public class FragmentAnadirCategorias extends Fragment {
     private IAPIService iapiService;
-
+    private List<Categoria> categorias;
     private EditText edtCategoria;
 
     public FragmentAnadirCategorias() {
@@ -31,10 +34,12 @@ public class FragmentAnadirCategorias extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        categorias = new ArrayList<>();
         Button volverAtras = view.findViewById(R.id.volverAtrasCategoria);
         Button anadirCategoria = view.findViewById(R.id.btAñadirAdminCategoria);
         edtCategoria = view.findViewById(R.id.edtAñadirCategorias);
         iapiService = RestClient.getInstance();
+        cargarCategorias();
 
         anadirCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +63,9 @@ public class FragmentAnadirCategorias extends Fragment {
     public void anadirCategoria(){
         String categoria = edtCategoria.getText().toString();
 
+
+
+
         if (categoria.isEmpty()) {
             edtCategoria.setError("Es necesario escribir algo...");
             edtCategoria.requestFocus();
@@ -69,18 +77,34 @@ public class FragmentAnadirCategorias extends Fragment {
         booleanCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                if (Boolean.TRUE.equals(response.body())){
-                    Toast.makeText(getContext(),"Has añadido la categoria " + categoria,Toast.LENGTH_LONG).show();
-
-                }else {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
-
+                for (int i = 0; i <categorias.size() ; i++) {
+                    if (categoria.equalsIgnoreCase(categorias.get(i).getNombre())){
+                        Toast.makeText(getContext(),"Esta categoria ya existe manolo",Toast.LENGTH_LONG).show();
+                    }else {
+                        Toast.makeText(getContext(),"Has añadido la categoria " + categoria,Toast.LENGTH_LONG).show();
+                    }
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+    public void cargarCategorias(){
+        iapiService.getCategoria().enqueue(new Callback<List<Categoria>>() {
+            @Override
+            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
+                if(response.isSuccessful()) {
+                    assert response.body() != null;
+                    categorias.addAll(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+
             }
         });
     }

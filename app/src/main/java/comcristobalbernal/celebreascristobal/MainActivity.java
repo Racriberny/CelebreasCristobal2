@@ -8,6 +8,7 @@ import androidx.preference.PreferenceManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -32,7 +33,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements FragmentCategorias.IOnAttach,
-        FragmentAutores.IOnAttach, IAutorFrase, ICategoriaFrase, FragmentAutorFrases.IOnAttachListenerAutorFrase,FragmentCategoriaFrase.IOnAttachListener {
+        FragmentAutores.IOnAttach, IAutorFrase, ICategoriaFrase,
+        FragmentAutorFrases.IOnAttachListenerAutorFrase,
+        FragmentCategoriaFrase.IOnAttachListener {
 
     private IAPIService apiService;
     private SharedPreferences prefs;
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         editor.putString("ip",RestClient.CASA);
         editor.putString("puerto", String.valueOf(RestClient.PORT));
         editor.apply();
+        System.out.println(frases);
     }
 
 
@@ -183,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
                 if(response.isSuccessful()) {
                     assert response.body() != null;
                     frases.addAll(response.body());
+                    Log.i(MainActivity.class.getSimpleName(),frases.toString());
                 }
             }
 

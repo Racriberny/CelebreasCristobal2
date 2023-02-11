@@ -2,9 +2,7 @@ package comcristobalbernal.celebreascristobal.Fragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,7 +37,7 @@ public class FragmentCategoriaFrase extends Fragment {
         RecyclerView rvLista = view.findViewById(R.id.rvLista);
         List<Frase> frasesCategoria = new ArrayList<>();
         for (Frase frase : frases) {
-            if (frase.getIdCategoria() == categoria.getId()) {
+            if (frase.getCategoriaId() == categoria.getId()) {
                 frasesCategoria.add(frase);
             }
         }
