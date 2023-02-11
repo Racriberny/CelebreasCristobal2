@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +46,23 @@ public class FragmentAnadirAutor extends Fragment {
         edtProfession = view.findViewById(R.id.edtProfession);
         autors = new ArrayList<>();
         Button btAnadir = view.findViewById(R.id.btAñadirAdminAutores);
+        Button btInicio = view.findViewById(R.id.btVolverInicioAutores);
 
         btAnadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anadirAutor();
+            }
+        });
+        btInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
             }
         });
 

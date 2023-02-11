@@ -13,6 +13,7 @@ import java.util.List;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.models.Frase;
 
+
 public class AdaptadorFrase extends RecyclerView.Adapter<AdaptadorFrase.FraseViewHolder>{
 
     private List<Frase> frases;

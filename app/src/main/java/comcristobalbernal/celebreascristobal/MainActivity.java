@@ -27,6 +27,7 @@ import comcristobalbernal.celebreascristobal.interfaces.ICategoriaFrase;
 import comcristobalbernal.celebreascristobal.models.Autor;
 import comcristobalbernal.celebreascristobal.models.Categoria;
 import comcristobalbernal.celebreascristobal.models.Frase;
+import comcristobalbernal.celebreascristobal.models.Usuario;
 import comcristobalbernal.celebreascristobal.rest.RestClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,13 +79,11 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         getCargarCategorias();
         getCargarAutores();
         getFrases();
-        //getCargaUsuarios();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("ip",RestClient.CASA);
         editor.putString("puerto", String.valueOf(RestClient.PORT));
         editor.apply();
-        System.out.println(frases);
     }
 
 
@@ -197,26 +196,4 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
             }
         });
     }
-
-
-
-
-
-
-    /*
-    private void getCargaUsuarios(){
-        apiService.getUsuario().enqueue(new Callback<List<Usuario>>() {
-            @Override
-            public void onResponse(@NonNull Call<List<Usuario>> call, @NonNull Response<List<Usuario>> response) {
-                assert response.body() != null;
-                usuario.addAll(response.body());
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<List<Usuario>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-
-            }
-        });
-    }*/
 }

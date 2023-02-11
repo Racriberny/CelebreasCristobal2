@@ -1,5 +1,6 @@
 package comcristobalbernal.celebreascristobal.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.models.Usuario;
 
 public class FragmentAdmin extends Fragment {
     private Button btnModificarFrase;
-    private Button btModificarCategoria;
     private Button btModificarAutor;
 
 
@@ -27,6 +28,9 @@ public class FragmentAdmin extends Fragment {
         Button btAnadirCategoria = view.findViewById(R.id.btAdminCategoria);
         Button btAnadirAutor = view.findViewById(R.id.btAdminAutor);
         Button btAnadirFrase = view.findViewById(R.id.btAdminFrase);
+        Button btModificarCategorias = view.findViewById(R.id.btModificarCategorias);
+
+
         btAnadirCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

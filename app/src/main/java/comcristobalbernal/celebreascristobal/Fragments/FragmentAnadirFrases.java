@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,13 +50,25 @@ public class FragmentAnadirFrases extends Fragment {
         categoria = view.findViewById(R.id.edtCategoriaFrase);
         fechaProgramada = view.findViewById(R.id.edtFechaFrase);
         texto = view.findViewById(R.id.edtTextoFrase);
-        Button button = view.findViewById(R.id.btAñadirAdminFrase);
+        Button btAñadir = view.findViewById(R.id.btAñadirAdminFrase);
+        Button btInicio = view.findViewById(R.id.btVolverIncioFrases);
         getCargarAutores();
         cargarCategorias();
-        button.setOnClickListener(new View.OnClickListener() {
+        btAñadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anadirFrase();
+            }
+        });
+        btInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
             }
         });
 

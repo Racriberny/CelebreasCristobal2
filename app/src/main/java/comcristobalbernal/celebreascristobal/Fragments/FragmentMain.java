@@ -6,15 +6,22 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
+import comcristobalbernal.celebreascristobal.models.Usuario;
+import comcristobalbernal.celebreascristobal.rest.RestClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class FragmentMain extends Fragment {
-
-    private Button btFrases, btnAdmin, btAutores, btCategorias;
-
+public class FragmentMain extends Fragment{
 
     public FragmentMain() {
         super(R.layout.layout_principal);
@@ -23,10 +30,13 @@ public class FragmentMain extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btFrases = view.findViewById(R.id.btConsultasFrases);
-        btnAdmin = view.findViewById(R.id.btAdmin);
-        btAutores = view.findViewById(R.id.btConsultasActores);
-        btCategorias = view.findViewById(R.id.btConsultasCategorias);
+        Button btFrases = view.findViewById(R.id.btConsultasFrases);
+        Button btnAdmin = view.findViewById(R.id.btAdmin);
+        Button btAutores = view.findViewById(R.id.btConsultasActores);
+        Button btCategorias = view.findViewById(R.id.btConsultasCategorias);
+
+
+
 
 
         btnAdmin.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +85,6 @@ public class FragmentMain extends Fragment {
                         .commit();
             }
         });
-
-
     }
 
 
