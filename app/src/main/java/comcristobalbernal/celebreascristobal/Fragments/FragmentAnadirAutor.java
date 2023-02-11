@@ -60,9 +60,19 @@ public class FragmentAnadirAutor extends Fragment {
         String muerte = edtMuerte.getText().toString();
         int nacimiento = Integer.parseInt(edtNacimiento.getText().toString());
         int muerteString = Integer.parseInt(muerte);
+        String nacimientoComprobacion = String.valueOf(nacimiento);
         String nombre = edtNombre.getText().toString();
         String profession = edtProfession.getText().toString();
-
+        if (muerte.isEmpty()) {
+            edtNombre.setError("Es necesario escribir algo...");
+            edtNombre.requestFocus();
+            return;
+        }
+        if (nacimientoComprobacion.isEmpty()) {
+            edtNombre.setError("Es necesario escribir algo...");
+            edtNombre.requestFocus();
+            return;
+        }
         if (nombre.isEmpty()) {
             edtNombre.setError("Es necesario escribir algo...");
             edtNombre.requestFocus();

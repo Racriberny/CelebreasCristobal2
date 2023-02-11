@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import comcristobalbernal.celebreascristobal.R;
 
 public class FragmentAdmin extends Fragment {
-    private Button btAñadirFrase;
     private Button btnModificarFrase;
     private Button btModificarCategoria;
     private Button btModificarAutor;
@@ -27,6 +26,7 @@ public class FragmentAdmin extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Button btAnadirCategoria = view.findViewById(R.id.btAdminCategoria);
         Button btAnadirAutor = view.findViewById(R.id.btAdminAutor);
+        Button btAnadirFrase = view.findViewById(R.id.btAdminFrase);
         btAnadirCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +49,17 @@ public class FragmentAdmin extends Fragment {
                         .replace(R.id.frgMain, FragmentAnadirAutor.class, null)
                         .commit();
 
+            }
+        });
+        btAnadirFrase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentAnadirFrases.class, null)
+                        .commit();
             }
         });
 
