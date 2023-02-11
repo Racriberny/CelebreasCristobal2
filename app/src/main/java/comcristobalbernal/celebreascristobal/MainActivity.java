@@ -20,6 +20,7 @@ import comcristobalbernal.celebreascristobal.Fragments.FragmentAutores;
 import comcristobalbernal.celebreascristobal.Fragments.FragmentCategoriaFrase;
 import comcristobalbernal.celebreascristobal.Fragments.FragmentCategorias;
 import comcristobalbernal.celebreascristobal.Fragments.FragmentAutorFrases;
+import comcristobalbernal.celebreascristobal.Fragments.FragmentMain;
 import comcristobalbernal.celebreascristobal.Utils.SettingActivity;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
 import comcristobalbernal.celebreascristobal.interfaces.IAutorFrase;
@@ -36,7 +37,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements FragmentCategorias.IOnAttach,
         FragmentAutores.IOnAttach, IAutorFrase, ICategoriaFrase,
         FragmentAutorFrases.IOnAttachListenerAutorFrase,
-        FragmentCategoriaFrase.IOnAttachListener {
+        FragmentCategoriaFrase.IOnAttachListener{
 
     private IAPIService apiService;
     private SharedPreferences prefs;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
     private List<Frase> frases;
     private List<Categoria> categorias;
     private Autor autorSeleccionado;
+    private Usuario activo;
     private Categoria categoriaSeleccionado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         categorias = new ArrayList<>();
         frases = new ArrayList<>();
         creacionyCargaDatos();
-
     }
 
 
