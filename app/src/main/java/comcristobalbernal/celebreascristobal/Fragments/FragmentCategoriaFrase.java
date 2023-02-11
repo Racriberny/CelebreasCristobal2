@@ -36,15 +36,14 @@ public class FragmentCategoriaFrase extends Fragment {
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        RecyclerView rvLista = view.findViewById(R.id.rvLista);
         List<Frase> frasesCategoria = new ArrayList<>();
         for (Frase frase : frases) {
-            if (frase.getIdAutor() == categoria.getId()) {
-                System.out.println(frase);
+            if (frase.getIdCategoria() == categoria.getId()) {
                 frasesCategoria.add(frase);
             }
         }
-        RecyclerView rvLista = view.findViewById(R.id.rvLista);
+
         AdapatadorCategoriaFrase adaptadorFrases = new AdapatadorCategoriaFrase(frasesCategoria, categoria);
         rvLista.setHasFixedSize(true);
         rvLista.setAdapter(adaptadorFrases);

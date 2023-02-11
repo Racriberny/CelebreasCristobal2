@@ -38,7 +38,7 @@ public class FragmentAutorFrases extends Fragment {
         RecyclerView rvLista = view.findViewById(R.id.rvLista);
         //preguntar german porque no llena nada...
         for (Frase frasess : frases) {
-            if (frasess.getId() == autor.getId()) {
+            if (frasess.getIdAutor() == autor.getId()) {
                 frasesAutor.add(frasess);
             }
         }
