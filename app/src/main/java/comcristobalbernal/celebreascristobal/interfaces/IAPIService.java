@@ -53,6 +53,10 @@ public interface IAPIService {
     Call<Boolean> modificarAutores(
             @Body Autor autor
     );
+    @PUT("frase/update")
+    Call<Boolean> modificarFrases(
+            @Body Frase frase
+    );
     @POST("frase/addValues")
     @FormUrlEncoded
     Call<Boolean> addFraseValues(@Field("texto") String texto,

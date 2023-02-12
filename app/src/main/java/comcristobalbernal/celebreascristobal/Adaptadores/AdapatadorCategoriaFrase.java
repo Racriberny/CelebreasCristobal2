@@ -44,7 +44,7 @@ public class AdapatadorCategoriaFrase extends RecyclerView.Adapter<AdapatadorCat
         return frases.size();
     }
 
-    public class CategoriFraseViewHolder extends RecyclerView.ViewHolder {
+    public static class CategoriFraseViewHolder extends RecyclerView.ViewHolder {
         private final TextView tvFrase;
 
         public CategoriFraseViewHolder(@NonNull View itemView) {

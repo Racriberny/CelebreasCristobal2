@@ -22,6 +22,10 @@ public class Frase {
         this.categoriaId = categoria_id;
     }
 
+    public Frase(int id,String texto){
+        this.id = id;
+        this.texto = texto;
+    }
     public int getId() {
         return id;
     }

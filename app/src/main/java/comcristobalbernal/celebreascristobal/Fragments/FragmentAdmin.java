@@ -28,6 +28,7 @@ public class FragmentAdmin extends Fragment {
         Button btAnadirFrase = view.findViewById(R.id.btAdminFrase);
         Button btModificarCategorias = view.findViewById(R.id.btModificarCategorias);
         Button btModificarAutores = view.findViewById(R.id.btModificarAutores);
+        Button btModificarFrases = view.findViewById(R.id.btModificarFrasesAdmin);
         btAnadirCategoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,6 +83,18 @@ public class FragmentAdmin extends Fragment {
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .replace(R.id.frgMain, FragmentAutoresModificar.class, null)
+                        .commit();
+            }
+        });
+
+        btModificarFrases.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentModificarFrases.class, null)
                         .commit();
             }
         });

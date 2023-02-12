@@ -37,7 +37,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements FragmentCategorias.IOnAttach,
         FragmentAutores.IOnAttach, IAutorFrase, ICategoriaFrase,
         FragmentAutorFrases.IOnAttachListenerAutorFrase,
-        FragmentCategoriaFrase.IOnAttachListener{
+        FragmentCategoriaFrase.IOnAttachListener, FragmentMain.IOnActivoUser{
 
     private IAPIService apiService;
     private SharedPreferences prefs;
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
     private List<Frase> frases;
     private List<Categoria> categorias;
     private Autor autorSeleccionado;
+    private String usuarioActivo;
     private Categoria categoriaSeleccionado;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         getCargarCategorias();
         getCargarAutores();
         getFrases();
+        cargarUsuarioActivo();
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("ip",RestClient.CASA);
@@ -86,7 +88,19 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
         editor.apply();
     }
 
+    private void cargarUsuarioActivo() {
+        if (usuarioActivo == null){
+            usuarioActivo = getIntent().getStringExtra("nombreUsuario");
+        }
+    }
 
+    @Override
+    public String usuario() {
+        if (usuarioActivo == null){
+            cargarUsuarioActivo();
+        }
+        return usuarioActivo;
+    }
     @Override
     public List<Autor> getAutor() {
         if (autores == null){
@@ -196,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
             }
         });
     }
+
 
 
 }
