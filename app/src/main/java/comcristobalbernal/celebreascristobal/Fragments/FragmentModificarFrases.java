@@ -84,7 +84,6 @@ public class FragmentModificarFrases extends Fragment {
                 Toast.makeText(getContext(),"Frase modificada",Toast.LENGTH_LONG).show();
 
             }
-
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();

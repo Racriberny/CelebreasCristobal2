@@ -34,8 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements FragmentCategorias.IOnAttach,
-        FragmentAutores.IOnAttach, IAutorFrase, ICategoriaFrase,
+public class MainActivity extends AppCompatActivity implements IAutorFrase, ICategoriaFrase,
         FragmentAutorFrases.IOnAttachListenerAutorFrase,
         FragmentCategoriaFrase.IOnAttachListener, FragmentMain.IOnActivoUser{
 
@@ -100,21 +99,6 @@ public class MainActivity extends AppCompatActivity implements FragmentCategoria
             cargarUsuarioActivo();
         }
         return usuarioActivo;
-    }
-    @Override
-    public List<Autor> getAutor() {
-        if (autores == null){
-            getCargarAutores();
-        }
-        return autores;
-    }
-
-    @Override
-    public List<Categoria> getCategorias() {
-        if (categorias == null){
-            getCargarCategorias();
-        }
-        return categorias;
     }
     @Override
     public List<Frase> getFrasesAutor() {

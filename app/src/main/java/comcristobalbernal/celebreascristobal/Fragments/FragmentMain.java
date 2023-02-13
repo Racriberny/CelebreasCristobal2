@@ -96,9 +96,9 @@ public class FragmentMain extends Fragment {
                 for (int i = 0; i <usuarioList.size() ; i++) {
                     if (usuario.equalsIgnoreCase(usuarioList.get(i).getNombre())){
                         if (usuarioList.get(i).isAdmin() == 0){
-                            Toast.makeText(getContext(),"No eres admin",Toast.LENGTH_LONG).show();
+                            btnAdmin.setVisibility(View.GONE);
                         }else if(usuarioList.get(i).isAdmin() == 1){
-                            Toast.makeText(getContext(),"Eres admin",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Eres admin",Toast.LENGTH_SHORT).show();
 
                             btnAdmin.setOnClickListener(new View.OnClickListener() {
                                 @Override
