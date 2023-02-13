@@ -45,39 +45,28 @@ public class FragmentAnadirFrases extends Fragment {
         iapiService = RestClient.getInstance();
         autorList = new ArrayList<>();
         categoriaList = new ArrayList<>();
-
+        getCargarAutores();
+        cargarCategorias();
         autor = view.findViewById(R.id.edtAutorFrase);
         categoria = view.findViewById(R.id.edtCategoriaFrase);
         fechaProgramada = view.findViewById(R.id.edtFechaFrase);
         texto = view.findViewById(R.id.edtTextoFrase);
-        Button btAñadir = view.findViewById(R.id.btAñadirAdminFrase);
-        Button btInicio = view.findViewById(R.id.btVolverIncioFrases);
-        getCargarAutores();
-        cargarCategorias();
-        btAñadir.setOnClickListener(new View.OnClickListener() {
+        Button button = view.findViewById(R.id.btAñadirAdminFrase);
+
+        System.out.println(autorList.toString());
+        System.out.println(categoriaList.toString());
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anadirFrase();
             }
         });
-        btInicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager manager = getParentFragmentManager();
-                manager.beginTransaction()
-                        .setReorderingAllowed(true)
-                        .addToBackStack(null)
-                        .replace(R.id.frgMain, FragmentMain.class, null)
-                        .commit();
-            }
-        });
-
-
     }
 
     private void anadirFrase() {
-        Boolean validacionAutores = null;
-        Boolean validacionCategorias = null;
+        boolean validacionId = false;
+        boolean validacionCategoria = false;
         int autoId = Integer.parseInt(autor.getText().toString());
         String autorIdString  = String.valueOf(autoId);
         int categoriaId = Integer.parseInt(categoria.getText().toString());
@@ -94,7 +83,7 @@ public class FragmentAnadirFrases extends Fragment {
             categoria.setError("Es necesario escribir algo...");
             categoria.requestFocus();
             return;
-        }//Faltaria la comprobacion de si el mes esta bien.
+        }
         if (fechaProgradama.isEmpty()) {
             fechaProgramada.setError("Es necesario escribir algo...");
             fechaProgramada.requestFocus();
@@ -105,25 +94,19 @@ public class FragmentAnadirFrases extends Fragment {
             texto.requestFocus();
             return;
         }
-        for (int i = 0; i <autorList.size() ; i++) {
+        for (int i = 0; i <autorList.size(); i++) {
             if (autoId == autorList.get(i).getId()){
-                validacionAutores = true;
-            }else {
-                validacionAutores =false;
+                validacionId = true;
             }
         }
-        for (int i = 0; i <categoriaList.size() ; i++) {
+        for (int i = 0; i <categoriaList.size(); i++) {
             if (categoriaId == categoriaList.get(i).getId()){
-                validacionCategorias = true;
-            }else {
-                validacionCategorias = false;
+                validacionCategoria = true;
             }
         }
-        if (Boolean.TRUE.equals(validacionAutores) && Boolean.TRUE.equals(validacionCategorias)){
-            Toast.makeText(getContext(),"Puedes crear la frase", Toast.LENGTH_LONG).show();
+        if (validacionId & validacionCategoria){
+            Toast.makeText(getContext(),"Se ha añadido correctamente!!",Toast.LENGTH_LONG).show();
             crearFrase(autoId,categoriaId,fechaProgradama,text);
-        }else if (Boolean.FALSE.equals(validacionAutores) && Boolean.FALSE.equals(validacionCategorias)){
-            Toast.makeText(getContext(),"La CategoriaId o el AutorId no existen!!!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -171,7 +154,7 @@ public class FragmentAnadirFrases extends Fragment {
     public void cargarCategorias(){
         iapiService.getCategoria().enqueue(new Callback<List<Categoria>>() {
             @Override
-            public void onResponse(Call<List<Categoria>> call, Response<List<Categoria>> response) {
+            public void onResponse(@NonNull Call<List<Categoria>> call, @NonNull Response<List<Categoria>> response) {
                 if(response.isSuccessful()) {
                     assert response.body() != null;
                     categoriaList.addAll(response.body());
@@ -179,7 +162,7 @@ public class FragmentAnadirFrases extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<Categoria>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Categoria>> call, @NonNull Throwable t) {
                 Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
             }
         });
