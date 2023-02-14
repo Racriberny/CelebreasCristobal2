@@ -53,10 +53,6 @@ public class FragmentAnadirFrases extends Fragment {
         texto = view.findViewById(R.id.edtTextoFrase);
         Button anadir = view.findViewById(R.id.btAñadirAdminFrase);
         Button volver = view.findViewById(R.id.btVolverIncioFrases);
-
-        System.out.println(autorList.toString());
-        System.out.println(categoriaList.toString());
-
         anadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,27 +73,21 @@ public class FragmentAnadirFrases extends Fragment {
     }
 
     private void anadirFrase() {
-        boolean validacionId = false;
-        boolean validacionCategoria = false;
-        int autoId = Integer.parseInt(autor.getText().toString());
-        String autorIdString  = String.valueOf(autoId);
-        int categoriaId = Integer.parseInt(categoria.getText().toString());
-        String categoriaIdString = String.valueOf(categoriaId);
+        boolean validacion = false;
         String fechaProgradama = fechaProgramada.getText().toString();
         String text = texto.getText().toString();
-
-        if (autorIdString.isEmpty()) {
+        if (autor.getText().toString().isEmpty()) {
             autor.setError("Es necesario escribir algo...");
             autor.requestFocus();
             return;
         }
-        if (categoriaIdString.isEmpty()) {
+        if (categoria.getText().toString().isEmpty()) {
             categoria.setError("Es necesario escribir algo...");
             categoria.requestFocus();
             return;
         }
         if (fechaProgradama.length() !=10) {
-            fechaProgramada.setError("La longitud tiene que ser de 10 caracteres!!!");
+            fechaProgramada.setError("La longitud tiene que ser de 10 caracteres y con esta formato 0000-00-00!!!");
             fechaProgramada.requestFocus();
             return;
         }
@@ -106,45 +96,42 @@ public class FragmentAnadirFrases extends Fragment {
             texto.requestFocus();
             return;
         }
-        for (int i = 0; i <autorList.size(); i++) {
+        int autoId = Integer.parseInt(autor.getText().toString());
+        int categoriaId = Integer.parseInt(categoria.getText().toString());
+        for (int i = 0; i < autorList.size() ; i++) {
             if (autoId == autorList.get(i).getId()){
-                validacionId = true;
+                validacion =true;
             }
         }
-        for (int i = 0; i <categoriaList.size(); i++) {
-            if (categoriaId == categoriaList.get(i).getId()){
-                validacionCategoria = true;
+        if (!validacion){
+            Toast.makeText(getContext(),"No existe autor",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        validacion = false;
+        for (int j = 0; j <categoriaList.size() ; j++) {
+            if (categoriaId == categoriaList.get(j).getId()){
+                validacion = true;
             }
         }
-        if (validacionId & validacionCategoria){
-            Toast.makeText(getContext(),"Se ha añadido correctamente!!",Toast.LENGTH_SHORT).show();
-            crearFrase(autoId,categoriaId,fechaProgradama,text);
+        if (!validacion){
+            Toast.makeText(getContext(),"No existe categoria",Toast.LENGTH_SHORT).show();
+            return;
         }
-    }
 
-    private void crearFrase(int autoId, int categoriaId, String fechaProgradama, String text) {
         iapiService.addFrase(new Frase(text,fechaProgradama,autoId,categoriaId)).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                if(response.isSuccessful()) {
-                    if(Boolean.TRUE.equals(response.body())) {
-                        Log.i(String.valueOf(getContext()), "Frase añadida correctamente");
-                    } else {
-                        Log.i(String.valueOf(getContext()), "Error al añadir la frase");
-
-                        Log.i(String.valueOf(getContext()), response.raw().toString());
-                    }
-                }
+                Toast.makeText(getContext(),"Se ha añadido!!",Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<Boolean> call, Throwable t) {
+
             }
         });
+
+
     }
-
-
     public void getCargarAutores() {
         iapiService.getAutor().enqueue(new Callback<List<Autor>>() {
 
@@ -153,6 +140,7 @@ public class FragmentAnadirFrases extends Fragment {
                 if(response.isSuccessful()) {
                     assert response.body() != null;
                     autorList.addAll(response.body());
+                    Log.i(String.valueOf(getContext()),autorList.toString());
                 }
             }
 
@@ -170,6 +158,7 @@ public class FragmentAnadirFrases extends Fragment {
                 if(response.isSuccessful()) {
                     assert response.body() != null;
                     categoriaList.addAll(response.body());
+                    Log.i(String.valueOf(getContext()),categoriaList.toString());
                 }
             }
 
