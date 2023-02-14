@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,6 +47,7 @@ public class FragmentModificarFrases extends Fragment {
         idFrase = view.findViewById(R.id.idModificarFraseAdmin);
         fraseModificar = view.findViewById(R.id.edtModificarFrase);
         Button btModificar = view.findViewById(R.id.tModificarAdminFrase);
+        Button btVolver = view.findViewById(R.id.btVolverInicioModificarFrase);
         RecyclerView recyclerView = view.findViewById(R.id.rvmodificarfrase);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adaptadorModificarFrases);
@@ -55,6 +57,17 @@ public class FragmentModificarFrases extends Fragment {
             @Override
             public void onClick(View v) {
                 modificarFrase();
+            }
+        });
+        btVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
             }
         });
     }
@@ -77,8 +90,26 @@ public class FragmentModificarFrases extends Fragment {
         });
     }
     public void modificarFrase(){
+        if (idFrase.getText().toString().isEmpty()){
+            idFrase.setError("Es necesario escribir algo...");
+            idFrase.requestFocus();
+            return;
+        }
         int id = Integer.parseInt(idFrase.getText().toString());
         String frase = fraseModificar.getText().toString();
+
+        if (fraseModificar.getText().toString().isEmpty()){
+            fraseModificar.setError("Es necesario escribir algo...");
+            fraseModificar.requestFocus();
+            return;
+        }
+        //Este apartado esta mal ya que si modificas por ejemplo la frase 1 luego en la base de datos no carga ningun id, ni de autores ni de categorias...
+        for (int i = 0; i < frases.size(); i++) {
+            if (id != frases.get(i).getId()){
+                Toast.makeText(getContext(),"No se puede modificar esta frase porque ese id de frase no existe!!",Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
         Frase fraseModificar = new Frase(id,frase);
 
         iapiService.modificarFrases(fraseModificar).enqueue(new Callback<Boolean>() {

@@ -71,32 +71,38 @@ public class FragmentAnadirAutor extends Fragment {
     private void anadirAutor() {
         Boolean validacion = null;
         String muerte = edtMuerte.getText().toString();
-        int nacimiento = Integer.parseInt(edtNacimiento.getText().toString());
-        int muerteString = Integer.parseInt(muerte);
-        String nacimientoComprobacion = String.valueOf(nacimiento);
-        String nombre = edtNombre.getText().toString();
-        String profession = edtProfession.getText().toString();
         if (muerte.isEmpty()) {
-            edtNombre.setError("Es necesario escribir algo...");
-            edtNombre.requestFocus();
+            edtMuerte.setError("Es necesario escribir algo...");
+            edtMuerte.requestFocus();
             return;
         }
+
+        if (edtNacimiento.getText().toString().isEmpty()){
+            edtNacimiento.setError("Es necesario escribir algo...");
+            edtNacimiento.requestFocus();
+            return;
+        }
+        int nacimiento = Integer.parseInt(edtNacimiento.getText().toString());
+        int muerteInteger = Integer.parseInt(muerte);
+        String nacimientoComprobacion = String.valueOf(nacimiento);
         if (nacimientoComprobacion.isEmpty()) {
             edtNombre.setError("Es necesario escribir algo...");
             edtNombre.requestFocus();
             return;
         }
+        String nombre = edtNombre.getText().toString();
         if (nombre.isEmpty()) {
             edtNombre.setError("Es necesario escribir algo...");
             edtNombre.requestFocus();
             return;
         }
+        String profession = edtProfession.getText().toString();
         if (profession.isEmpty()) {
             edtProfession.setError("Es necesario escribir algo...");
             edtProfession.requestFocus();
             return;
         }
-        if (nacimiento > muerteString){
+        if (nacimiento > muerteInteger){
             validacion = false;
             Toast.makeText(getContext(),"La muerte tiene que ser superior al nacimiento o igual!!!",Toast.LENGTH_SHORT).show();
             return;
@@ -112,18 +118,7 @@ public class FragmentAnadirAutor extends Fragment {
             booleanCall.enqueue(new Callback<Boolean>() {
                 @Override
                 public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                    for (int i = 0; i <autors.size() ; i++) {
-                        if (nombre.equalsIgnoreCase(autors.get(i).getNombre())){
-                            Toast.makeText(getContext(),"Este autor ya existe manolo",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    if (Boolean.TRUE.equals(response.body())){
-                        Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_SHORT).show();
-                    }else {
-                        Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

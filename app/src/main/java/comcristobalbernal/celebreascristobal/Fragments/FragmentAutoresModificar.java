@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +50,7 @@ public class FragmentAutoresModificar extends Fragment {
         autorList = new ArrayList<>();
         adaptadorAutoresModificar = new AdaptadorAutoresModificar();
         Button botonModificar = view.findViewById(R.id.btAdminModificarAutor);
+        Button botonVolver = view.findViewById(R.id.btVolverAlInicioModifcarAutores);
         id = view.findViewById(R.id.idModificarAutores);
         muerte = view.findViewById(R.id.edtMuerteModificarAutores);
         nacimiento = view.findViewById(R.id.edtNacimientoAutores);
@@ -64,6 +66,17 @@ public class FragmentAutoresModificar extends Fragment {
             @Override
             public void onClick(View v) {
                 modificarAutores();
+            }
+        });
+        botonVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
             }
         });
     }
@@ -89,11 +102,37 @@ public class FragmentAutoresModificar extends Fragment {
         });
     }
     public void modificarAutores(){
+        if (id.getText().toString().isEmpty()){
+            id.setError("Es necesario escribir algo...");
+            id.requestFocus();
+            return;
+        }
         int idAutor = Integer.parseInt(id.getText().toString());
+        if (muerte.getText().toString().isEmpty()){
+            muerte.setError("Es necesario escribir algo...");
+            muerte.requestFocus();
+            return;
+        }
         String muerteAutor = muerte.getText().toString();
+        if (nacimiento.getText().toString().isEmpty()){
+            nacimiento.setError("Es necesario escribir algo...");
+            nacimiento.requestFocus();
+            return;
+        }
         int nacimientoAutor = Integer.parseInt(nacimiento.getText().toString());
+        if (nombre.getText().toString().isEmpty()){
+            nombre.setError("Es necesario escribr numeros!!");
+            nombre.requestFocus();
+            return;
+        }
+        if (profession.getText().toString().isEmpty()){
+            profession.setError("Es necesario escribir algo...");
+            profession.requestFocus();
+            return;
+        }
         String nombreAutor = nombre.getText().toString();
         String professionAuto = profession.getText().toString();
+
         Autor autorModificado = new Autor(idAutor,nombreAutor,nacimientoAutor,muerteAutor,professionAuto);
 
         iapiService.modificarAutores(autorModificado).enqueue(new Callback<Boolean>() {

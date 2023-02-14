@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,6 +57,17 @@ public class FragmentCategoriasModificarLista extends Fragment {
                 modificarCategoria();
             }
         });
+        buttonVolver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
+            }
+        });
 
     }
 
@@ -79,8 +91,19 @@ public class FragmentCategoriasModificarLista extends Fragment {
     }
 
     public void modificarCategoria(){
+
+        if (id.getText().toString().isEmpty()){
+            id.setError("Es necesario escribir algo...");
+            id.requestFocus();
+            return;
+        }
         int idCategoria = Integer.parseInt(id.getText().toString());
         String cambiaCategoria = categoriaModificada.getText().toString();
+        if (cambiaCategoria.isEmpty()){
+            categoriaModificada.setError("Es necesario escribir algo...");
+            categoriaModificada.requestFocus();
+            return;
+        }
         Categoria categoria = new Categoria(idCategoria,cambiaCategoria);
 
         iapiService.modificarCategoria(categoria).enqueue(new Callback<Boolean>() {

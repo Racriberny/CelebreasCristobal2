@@ -1,5 +1,6 @@
 package comcristobalbernal.celebreascristobal.Adaptadores;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,11 +62,12 @@ public class AdaptadorAutoresModificar extends RecyclerView.Adapter<AdaptadorAut
             profession = itemView.findViewById(R.id.professionAutoresModificar);
         }
 
+        @SuppressLint("SetTextI18n")
         public void bindAutores(Autor autor){
             id.setText(String.valueOf(autor.getId()));
-            muerte.setText(autor.getMuerte());
-            nacimiento.setText(String.valueOf(autor.getNacimiento()));
-            nombre.setText(autor.getNombre());
+            muerte.setText("Muerte: " + autor.getMuerte());
+            nacimiento.setText(String.valueOf("Nacimiento: " + autor.getNacimiento()));
+            nombre.setText("Nombre: " + autor.getNombre());
             profession.setText(autor.getProfesion());
         }
     }
