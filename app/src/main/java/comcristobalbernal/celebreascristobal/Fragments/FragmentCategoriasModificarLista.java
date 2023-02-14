@@ -44,6 +44,7 @@ public class FragmentCategoriasModificarLista extends Fragment {
         id = view.findViewById(R.id.idListaCategoria);
         categoriaModificada = view.findViewById(R.id.modificacionCategoria);
         Button buttonModificar = view.findViewById(R.id.botonModificarCategoria);
+        Button buttonVolver = view.findViewById(R.id.btVolverIncioModifcarCategoria);
         RecyclerView recyclerView = view.findViewById(R.id.rvListaModificar);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adaptadorCategoriasMLista);
