@@ -12,9 +12,6 @@ import androidx.fragment.app.FragmentManager;
 import comcristobalbernal.celebreascristobal.R;
 
 public class FragmentAdmin extends Fragment {
-    private Button btnModificarFrase;
-    private Button btModificarAutor;
-
 
     public FragmentAdmin() {
         super(R.layout.layout_admin);
