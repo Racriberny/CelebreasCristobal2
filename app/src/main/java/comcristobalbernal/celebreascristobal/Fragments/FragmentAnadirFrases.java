@@ -51,15 +51,27 @@ public class FragmentAnadirFrases extends Fragment {
         categoria = view.findViewById(R.id.edtCategoriaFrase);
         fechaProgramada = view.findViewById(R.id.edtFechaFrase);
         texto = view.findViewById(R.id.edtTextoFrase);
-        Button button = view.findViewById(R.id.btAñadirAdminFrase);
+        Button anadir = view.findViewById(R.id.btAñadirAdminFrase);
+        Button volver = view.findViewById(R.id.btVolverIncioFrases);
 
         System.out.println(autorList.toString());
         System.out.println(categoriaList.toString());
 
-        button.setOnClickListener(new View.OnClickListener() {
+        anadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 anadirFrase();
+            }
+        });
+        volver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager manager = getParentFragmentManager();
+                manager.beginTransaction()
+                        .setReorderingAllowed(true)
+                        .addToBackStack(null)
+                        .replace(R.id.frgMain, FragmentMain.class, null)
+                        .commit();
             }
         });
     }
@@ -84,8 +96,8 @@ public class FragmentAnadirFrases extends Fragment {
             categoria.requestFocus();
             return;
         }
-        if (fechaProgradama.isEmpty()) {
-            fechaProgramada.setError("Es necesario escribir algo...");
+        if (fechaProgradama.length() !=10) {
+            fechaProgramada.setError("La longitud tiene que ser de 10 caracteres!!!");
             fechaProgramada.requestFocus();
             return;
         }

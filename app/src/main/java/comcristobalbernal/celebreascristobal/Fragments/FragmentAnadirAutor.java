@@ -99,6 +99,7 @@ public class FragmentAnadirAutor extends Fragment {
         if (nacimiento > muerteString){
             validacion = false;
             Toast.makeText(getContext(),"La muerte tiene que ser superior al nacimiento o igual!!!",Toast.LENGTH_LONG).show();
+            return;
         }
         for (int i = 0; i < autors.size() ; i++) {
             validacion = nombre.equalsIgnoreCase(autors.get(i).getNombre());

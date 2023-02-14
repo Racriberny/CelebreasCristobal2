@@ -62,32 +62,31 @@ public class FragmentAnadirCategorias extends Fragment {
 
     public void anadirCategoria(){
         String categoria = edtCategoria.getText().toString();
-        Boolean validacion = null;
         if (categoria.isEmpty()) {
             edtCategoria.setError("Es necesario escribir algo...");
             edtCategoria.requestFocus();
             return;
         }
         for (int i = 0; i <categorias.size() ; i++) {
-            validacion = categoria.equalsIgnoreCase(categorias.get(i).getNombre());
+            if (categoria.equalsIgnoreCase(categorias.get(i).getNombre())){
+                Toast.makeText(getContext(), "Ya existe esta categoria " + categoria, Toast.LENGTH_LONG).show();
+                return;
+            }
         }
-        if (Boolean.TRUE.equals(validacion)){
-            Toast.makeText(getContext(), "Ya existe esta categoria", Toast.LENGTH_LONG).show();
-        }else if (Boolean.FALSE.equals(validacion)){
-            Call<Boolean> booleanCall = iapiService.addCategoria(new Categoria(categoria));
+        Call<Boolean> booleanCall = iapiService.addCategoria(new Categoria(categoria));
 
-            booleanCall.enqueue(new Callback<Boolean>() {
-                @Override
-                public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                    Toast.makeText(getContext(), "Se ha creado correctamente la categoria " +categoria, Toast.LENGTH_LONG).show();
-                }
+        booleanCall.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
+                Toast.makeText(getContext(), "Se ha creado correctamente la categoria " +categoria, Toast.LENGTH_LONG).show();
+            }
 
-                @Override
-                public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
-                }
-            });
-        }
+            @Override
+            public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
     public void cargarCategorias(){
         iapiService.getCategoria().enqueue(new Callback<List<Categoria>>() {

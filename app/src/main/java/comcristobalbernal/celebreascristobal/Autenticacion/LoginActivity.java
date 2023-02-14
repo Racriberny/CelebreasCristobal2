@@ -71,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         booleanCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                System.out.println(response.body());
                 if (Boolean.TRUE.equals(response.body())) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("nombreUsuario",username));
                     Toast.makeText(LoginActivity.this, "Has inicion sesion con " +username, Toast.LENGTH_LONG).show();

@@ -18,6 +18,8 @@ import java.util.List;
 import comcristobalbernal.celebreascristobal.Adaptadores.AdaptadorModificarFrases;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
+import comcristobalbernal.celebreascristobal.models.Autor;
+import comcristobalbernal.celebreascristobal.models.Categoria;
 import comcristobalbernal.celebreascristobal.models.Frase;
 import comcristobalbernal.celebreascristobal.rest.RestClient;
 import retrofit2.Call;
@@ -56,6 +58,8 @@ public class FragmentModificarFrases extends Fragment {
             }
         });
     }
+
+
     public void getCargarFrases(){
         iapiService.getFrases().enqueue(new Callback<List<Frase>>() {
             @Override
@@ -72,7 +76,6 @@ public class FragmentModificarFrases extends Fragment {
             }
         });
     }
-
     public void modificarFrase(){
         int id = Integer.parseInt(idFrase.getText().toString());
         String frase = fraseModificar.getText().toString();

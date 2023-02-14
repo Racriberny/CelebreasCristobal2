@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import comcristobalbernal.celebreascristobal.R;
+import comcristobalbernal.celebreascristobal.models.Autor;
+import comcristobalbernal.celebreascristobal.models.Categoria;
 import comcristobalbernal.celebreascristobal.models.Frase;
 
 public class AdaptadorModificarFrases extends RecyclerView.Adapter<AdaptadorModificarFrases.FrasesViewHolderLista> {
@@ -54,6 +56,7 @@ public class AdaptadorModificarFrases extends RecyclerView.Adapter<AdaptadorModi
             super(itemView);
             idFrases = itemView.findViewById(R.id.idModificarFrases);
             tvFrases = itemView.findViewById(R.id.tvFrasesModificar);
+
         }
         public void bindFrases(Frase frase){
             idFrases.setText(String.valueOf(frase.getId()));
