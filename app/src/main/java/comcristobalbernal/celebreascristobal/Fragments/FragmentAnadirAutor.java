@@ -98,14 +98,14 @@ public class FragmentAnadirAutor extends Fragment {
         }
         if (nacimiento > muerteString){
             validacion = false;
-            Toast.makeText(getContext(),"La muerte tiene que ser superior al nacimiento o igual!!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"La muerte tiene que ser superior al nacimiento o igual!!!",Toast.LENGTH_SHORT).show();
             return;
         }
         for (int i = 0; i < autors.size() ; i++) {
             validacion = nombre.equalsIgnoreCase(autors.get(i).getNombre());
         }
         if (Boolean.TRUE.equals(validacion)){
-            Toast.makeText(getContext(), "Ya existe este autor", Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(), "Ya existe este autor", Toast.LENGTH_SHORT).show();
         }else if (Boolean.FALSE.equals(validacion)){
             Call<Boolean> booleanCall = iapiService.addAutor(new Autor(nombre,nacimiento,muerte,profession));
 
@@ -114,21 +114,21 @@ public class FragmentAnadirAutor extends Fragment {
                 public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                     for (int i = 0; i <autors.size() ; i++) {
                         if (nombre.equalsIgnoreCase(autors.get(i).getNombre())){
-                            Toast.makeText(getContext(),"Este autor ya existe manolo",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Este autor ya existe manolo",Toast.LENGTH_SHORT).show();
                         }else {
-                            Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_LONG).show();
+                            Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_SHORT).show();
                         }
                     }
                     if (Boolean.TRUE.equals(response.body())){
-                        Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Has añadido el autor con nombre " + nombre,Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -148,7 +148,7 @@ public class FragmentAnadirAutor extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_SHORT).show();
             }
         });
     }

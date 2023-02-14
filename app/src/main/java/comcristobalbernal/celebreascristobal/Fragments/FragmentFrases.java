@@ -57,7 +57,7 @@ public class FragmentFrases extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Frase>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

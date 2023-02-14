@@ -117,7 +117,7 @@ public class FragmentAnadirFrases extends Fragment {
             }
         }
         if (validacionId & validacionCategoria){
-            Toast.makeText(getContext(),"Se ha añadido correctamente!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext(),"Se ha añadido correctamente!!",Toast.LENGTH_SHORT).show();
             crearFrase(autoId,categoriaId,fechaProgradama,text);
         }
     }
@@ -139,7 +139,7 @@ public class FragmentAnadirFrases extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -158,7 +158,7 @@ public class FragmentAnadirFrases extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -175,7 +175,7 @@ public class FragmentAnadirFrases extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Categoria>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_SHORT).show();
             }
         });
     }

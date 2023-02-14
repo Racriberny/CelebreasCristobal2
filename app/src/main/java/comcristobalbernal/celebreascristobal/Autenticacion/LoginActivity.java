@@ -73,19 +73,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                 if (Boolean.TRUE.equals(response.body())) {
                     startActivity(new Intent(LoginActivity.this, MainActivity.class).putExtra("nombreUsuario",username));
-                    Toast.makeText(LoginActivity.this, "Has inicion sesion con " +username, Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Has inicion sesion con " +username, Toast.LENGTH_SHORT).show();
                     prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putString("name",username);
                     editor.putString("contrasena",password);
                     editor.apply();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Usuario no válido", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Usuario no válido", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

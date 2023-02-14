@@ -72,7 +72,7 @@ public class FragmentModificarFrases extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Frase>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -84,12 +84,12 @@ public class FragmentModificarFrases extends Fragment {
         iapiService.modificarFrases(fraseModificar).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                Toast.makeText(getContext(),"Frase modificada",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Frase modificada",Toast.LENGTH_SHORT).show();
 
             }
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
 
             }
         });

@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity implements IAutorFrase, ICat
 
             @Override
             public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "No se han podido obtener los autores", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "No se han podido obtener los autores", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements IAutorFrase, ICat
 
             @Override
             public void onFailure(@NonNull Call<List<Categoria>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "No se han podido obtener las categorias", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "No se han podido obtener las categorias", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements IAutorFrase, ICat
 
             @Override
             public void onFailure(@NonNull Call<List<Frase>> call, @NonNull Throwable t) {
-                Toast.makeText(MainActivity.this, "No se han podido obtener las frases", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "No se han podido obtener las frases", Toast.LENGTH_SHORT).show();
             }
         });
     }

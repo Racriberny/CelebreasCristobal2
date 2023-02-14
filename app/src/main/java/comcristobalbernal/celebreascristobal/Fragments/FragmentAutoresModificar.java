@@ -84,7 +84,7 @@ public class FragmentAutoresModificar extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<Autor>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "No se han podido obtener los autores", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "No se han podido obtener los autores", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,12 +99,12 @@ public class FragmentAutoresModificar extends Fragment {
         iapiService.modificarAutores(autorModificado).enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                Toast.makeText(getContext(),"Autor modificada",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Autor modificada",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
             }
         });
     }

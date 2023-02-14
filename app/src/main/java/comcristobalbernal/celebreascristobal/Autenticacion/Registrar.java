@@ -62,16 +62,16 @@ public class Registrar extends AppCompatActivity {
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
                 System.out.println(response.body());
                 if (Boolean.TRUE.equals(response.body())) {
-                    Toast.makeText(Registrar.this, "Has creado un usuario con el nombre " + username, Toast.LENGTH_LONG).show();
+                    Toast.makeText(Registrar.this, "Has creado un usuario con el nombre " + username, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Registrar.this, LoginActivity.class));
                 } else {
-                    Toast.makeText(Registrar.this, "Usuario no registrado o ya existente", Toast.LENGTH_LONG).show();
+                    Toast.makeText(Registrar.this, "Usuario no registrado o ya existente", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<Boolean> call, Throwable t) {
-                Toast.makeText(Registrar.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Registrar.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

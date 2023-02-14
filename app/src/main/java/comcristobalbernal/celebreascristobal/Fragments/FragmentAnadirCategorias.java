@@ -69,7 +69,7 @@ public class FragmentAnadirCategorias extends Fragment {
         }
         for (int i = 0; i <categorias.size() ; i++) {
             if (categoria.equalsIgnoreCase(categorias.get(i).getNombre())){
-                Toast.makeText(getContext(), "Ya existe esta categoria " + categoria, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ya existe esta categoria " + categoria, Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -78,12 +78,12 @@ public class FragmentAnadirCategorias extends Fragment {
         booleanCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                Toast.makeText(getContext(), "Se ha creado correctamente la categoria " +categoria, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Se ha creado correctamente la categoria " +categoria, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(@NonNull Call<Boolean> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -100,7 +100,7 @@ public class FragmentAnadirCategorias extends Fragment {
 
             @Override
             public void onFailure(Call<List<Categoria>> call, Throwable t) {
-                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Ha fallado", Toast.LENGTH_SHORT).show();
             }
         });
     }
