@@ -61,7 +61,8 @@ public class LoginActivity extends AppCompatActivity {
             etUsername.setError("Es necesario escribir algo...");
             etUsername.requestFocus();
             return;
-        } else if (password.isEmpty()) {
+        }
+        if (password.isEmpty()) {
             etPassword.setError("Es necesario escribir algo...");
             etPassword.requestFocus();
             return;
@@ -80,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("contrasena",password);
                     editor.apply();
                 } else {
-                    Toast.makeText(LoginActivity.this, "Usuario no válido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Usuario no válido o no registrado!!!", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
