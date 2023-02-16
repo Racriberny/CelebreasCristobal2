@@ -53,7 +53,5 @@ public class AdaptadoFrasesAutor extends RecyclerView.Adapter<AdaptadoFrasesAuto
         public void bindAutorFrase(Frase frase){
             tvFrase.setText(frase.getTexto());
         }
-
-
     }
 }
