@@ -41,7 +41,6 @@ public class FragmentCategoriaFrase extends Fragment {
                 frasesCategoria.add(frase);
             }
         }
-
         AdapatadorCategoriaFrase adaptadorFrases = new AdapatadorCategoriaFrase(frasesCategoria, categoria);
         rvLista.setHasFixedSize(true);
         rvLista.setAdapter(adaptadorFrases);

@@ -7,9 +7,9 @@ public class RestClient {
     private static IAPIService instance;
     public static final int PORT = 8080;
 
-    public static final String CASA = "192.168.1.122";
+    public static final String CASA = "192.168.1.120";
     public static final String INSTI = "192.168.20.68";
-    private static final String BASE_URL = "http://" + INSTI + ":" +  PORT + "/";
+    private static final String BASE_URL = "http://" + CASA + ":" +  PORT + "/";
 
     /* Lo hacemos privado para evitar que se puedan crear instancias de esta forma */
     private RestClient() {
