@@ -11,11 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 import comcristobalbernal.celebreascristobal.MainActivity;
 import comcristobalbernal.celebreascristobal.R;
 import comcristobalbernal.celebreascristobal.Utils.HashGenerator;
 import comcristobalbernal.celebreascristobal.interfaces.IAPIService;
+import comcristobalbernal.celebreascristobal.models.Frase;
 import comcristobalbernal.celebreascristobal.models.Usuario;
 import comcristobalbernal.celebreascristobal.rest.RestClient;
 import retrofit2.Call;
@@ -34,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         iapiService = RestClient.getInstance();
         etUsername = findViewById(R.id.etUsuario);
         etPassword = findViewById(R.id.etContra);
+        //esto no hace nada!!! solo lo he puesto para comprobar si funciona la conexion al servidor!!!1
+        getFrases();
 
         findViewById(R.id.btIniciarSesion).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +54,20 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(LoginActivity.this, Registrar.class));
+            }
+        });
+    }
+
+    private void getFrases() {
+        iapiService.getFrases().enqueue(new Callback<List<Frase>>() {
+            @Override
+            public void onResponse(Call<List<Frase>> call, Response<List<Frase>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Frase>> call, Throwable t) {
+                Toast.makeText(getBaseContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
