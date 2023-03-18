@@ -15,6 +15,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface IAPIService {
+
+    //Get devuelve
     @GET("frase/all")
     Call<List<Frase>> getFrases();
 
@@ -23,6 +25,7 @@ public interface IAPIService {
 
     @GET("autor/all")
     Call<List<Autor>> getAutor();
+    //Post añade
 
     @POST("autor/add")
     Call<Boolean> addAutor(@Body Autor autor);
@@ -57,13 +60,4 @@ public interface IAPIService {
     Call<Boolean> modificarFrases(
             @Body Frase frase
     );
-    @POST("frase/addValues")
-    @FormUrlEncoded
-    Call<Boolean> addFraseValues(@Field("texto") String texto,
-                                 @Field("fechaProgramada") Date fechaProgramada,
-                                 @Field("idAutor") int idAutor,
-                                 @Field("idCategoria")int idCategoria);
-
-
-
 }
