@@ -60,7 +60,6 @@ public class Registrar extends AppCompatActivity {
         booleanCall.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(@NonNull Call<Boolean> call, @NonNull Response<Boolean> response) {
-                System.out.println(response.body());
                 if (Boolean.TRUE.equals(response.body())) {
                     Toast.makeText(Registrar.this, "Has creado un usuario con el nombre " + username, Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(Registrar.this, LoginActivity.class));
